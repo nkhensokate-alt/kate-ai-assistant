@@ -17,5 +17,5 @@ export function friendlyError(err: Error | undefined) {
 
 export function useKate(mode: "chat" | "research" | "email", initialMessages?: UIMessage[], chatId?: string) {
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/ai", body: { mode } }), [mode]);
-  return useChat({ id: chatId ?? `kate-${mode}`, transport, messages: initialMessages });
+  return useChat({ id: chatId ?? `kate-${mode}`, transport, ...(initialMessages ? { messages: initialMessages } : {}) });
 }
