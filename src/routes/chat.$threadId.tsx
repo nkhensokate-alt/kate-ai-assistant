@@ -88,7 +88,7 @@ function Chat({ thread }: { thread: Thread }) {
 
   useEffect(() => {
     if ((status === "ready" || status === "error") && messages.length !== thread.messages.length) upsertThread(thread.id, messages);
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const box = endRef.current?.parentElement; if (box) box.scrollTop = box.scrollHeight;
   }, [messages, status, thread.id, thread.messages.length]);
   useEffect(() => { if (!busy) ref.current?.focus(); }, [busy]);
 
