@@ -15,7 +15,7 @@ export function friendlyError(err: Error | undefined) {
   return "Something went wrong while Kate was thinking. Please try again.";
 }
 
-export function useKate(mode: "chat" | "research" | "email", initialMessages?: UIMessage[]) {
+export function useKate(mode: "chat" | "research" | "email", initialMessages?: UIMessage[], chatId?: string) {
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/ai", body: { mode } }), [mode]);
-  return useChat({ id: `kate-${mode}`, transport, messages: initialMessages });
+  return useChat({ id: chatId ?? `kate-${mode}`, transport, messages: initialMessages });
 }
